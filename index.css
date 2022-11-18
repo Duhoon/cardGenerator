@@ -1,0 +1,76 @@
+body {
+    margin : 0px;
+    padding : 0px;
+}
+
+.board {
+    margin-top : 2rem;
+    display : flex;
+    justify-content: center;
+
+}
+
+.input-form {
+    display : flex;
+    flex-direction: column;
+    justify-items: start;
+    justify-self: center;
+}
+
+.input-group {
+    margin-bottom : 1rem;
+}
+
+input {
+    padding : 1rem 1rem;
+    font-size : 1.5rem;
+}
+
+.line{
+    margin : 3rem auto;
+    width : 700px ;
+    border-top : solid 2px #ebebeb;
+}
+
+.deck {
+    padding-top : 2rem;
+    display : flex;
+    justify-content: space-evenly;
+}
+
+.deck .card, .deck .card .back{
+    width : 100px;
+    height : 160px;
+    border: solid 2px #000000;
+    border-radius : 10px;
+}
+
+.deck .card {
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.deck .card.back{
+    background-color: #000;
+}
+
+.deck .card p {
+    font-size : 2rem;
+    font-weight : 700;
+    text-align: center;
+}
+
+.btn-group {
+    display : flex;
+    justify-content: space-evenly;
+}
+
+button {
+    padding : 1rem 2rem;
+    font-weight: 700;
+}
+
+button:last-child {
+    margin-bottom : 0;
+}
