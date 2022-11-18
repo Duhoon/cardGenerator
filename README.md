@@ -1,6 +1,6 @@
 # Card Generator
 
-This is simple Card Generator using HTML/CSS & JavaScript.
+This is a simple Card Generator using HTML/CSS & JavaScript.
 
 You can insert numbers in two of each input form.
 Then if you click button "Create", two card decks will be generated.
