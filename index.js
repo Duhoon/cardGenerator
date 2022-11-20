@@ -1,5 +1,6 @@
 const input1 = document.querySelector("#numCard1");
 const input2 = document.querySelector("#numCard2");
+const inputArr = [input1, input2];
 const createBtn = document.getElementById("createBtn");
 const resetBtn = document.getElementById("resetBtn");
 
@@ -7,78 +8,55 @@ const resetBtn = document.getElementById("resetBtn");
 input1.value=0;
 input2.value=0;
 
-const Card1 = (num)=>{
-    const deck = [];
-    const deckEle = document.querySelector(".deck1");
+const Deck = function (_deckClassName){
+    this.cards = [];
+    this.cardsNum = 0;
+    this.deckEle = document.querySelector(_deckClassName);
 
-    const deckCreate = (num)=>{    
+    this.createCards = (num)=>{    
         for(let i = 0 ; i < num ; i++){
             let randNum = Math.floor(Math.random() * 100);
-            deck.push(randNum);
+            this.cards.push(randNum);
         }
-        deck.sort((a,b)=>a-b);
+        this.cards.sort((a,b)=>a-b);
+    };
+
+    const createCardsCallback = (num)=>{
+        let card = document.createElement("div");
+            card.classList.add(...["card", "back"]);
+
+            card.addEventListener("click", (e)=>{
+                if (e.currentTarget !== e.target) return;
+                let thisCard = e.target;
+                thisCard.classList.toggle("back");
+            })
+
+            let paragraph = document.createElement("p");
+            paragraph.textContent = num;
+
+            card.appendChild(paragraph);
+            this.deckEle.appendChild(card);
     }
 
-    deckCreate(num);
+    this.createCardsAtDocument = ()=>{this.cards.map(createCardsCallback)};
 
-    deck.map((num)=>{
-        let card = document.createElement("div");
-        card.classList.add(...["card", "back"]);
-        card.addEventListener("click", (e)=>{
-            if (e.currentTarget !== e.target) return;
-            let thisCard = e.target;
-            thisCard.classList.toggle("back");
-        })
-
-        let paragraph = document.createElement("p");
-        paragraph.textContent = num;
-
-        card.appendChild(paragraph);
-        deckEle.appendChild(card);
-    })
-
-    return deck;
-}
-
-const Card2 = (num)=>{
-    const deck = [];
-    const deckEle = document.querySelector(".deck2");
-
-    const deckCreate = (num)=>{    
-        for(let i = 0 ; i < num ; i++){
-            let randNum = Math.floor(Math.random() * 100);
-            deck.push(randNum);
-        }
-        deck.sort((a,b)=>a-b);
+    this.resetCards = ()=>{
+        this.cards = [];
+        this.deckEle.innerHTML = "";
     }
-
-    deckCreate(num);
-
-    deck.map((num)=>{
-        let card = document.createElement("div");
-        card.classList.add(...["card", "back"]);
-        card.addEventListener("click", (e)=>{
-            if (e.currentTarget !== e.target) return;
-            let thisCard = e.target;
-            thisCard.classList.toggle("back");
-        })
-
-        let paragraph = document.createElement("p");
-        paragraph.textContent = num;
-
-        card.appendChild(paragraph);
-        deckEle.appendChild(card);
-    })
-
-    return deck;
 }
+
+const deckArr = [new Deck(".deck1"), new Deck(".deck2")];
 
 createBtn.addEventListener("click", (e)=>{
-    Card1(input1.value);
-    Card2(input2.value);
+    deckArr.map((deck, idx)=>{
+        deck.createCards(inputArr[idx].value);
+        deck.createCardsAtDocument();
+    })
 })
 
 resetBtn.addEventListener("click", (e)=>{
-    document.querySelector(".deck1").innerHTML = "";
-    document.querySelector(".deck2").innerHTML = "";
+    deckArr.forEach((deck)=>{
+        deck.resetCards();
+    })
 })
