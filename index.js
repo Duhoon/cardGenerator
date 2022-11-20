@@ -10,7 +10,6 @@ input2.value=0;
 
 const Deck = function (_deckClassName){
     this.cards = [];
-    this.cardsNum = 0;
     this.deckEle = document.querySelector(_deckClassName);
 
     this.createCards = (num)=>{    
